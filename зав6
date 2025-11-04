@@ -1,0 +1,15 @@
+# 6) Оцінка виразу у ЗПН (Reverse Polish Notation)
+def evalRPN(tokens: List[str]) -> int:
+    st = []
+    for t in tokens:
+        if t in {"+", "-", "*", "/"}:
+            b = st.pop()
+            a = st.pop()
+            if t == '+': st.append(a + b)
+            elif t == '-': st.append(a - b)
+            elif t == '*': st.append(a * b)
+            else:          st.append(int(a / b))  # обрізання до нуля
+        else:
+            st.append(int(t))
+    return st[-1]
+# Складність: O(n) часу, O(n) пам’яті.
