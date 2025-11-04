@@ -1,0 +1,21 @@
+# 5) Декодувати рядок (k[encoded_string])
+def decodeString(s: str) -> str:
+    num_st, str_st = [], []
+    cur_num = 0
+    cur_str = []
+    for ch in s:
+        if ch.isdigit():
+            cur_num = cur_num * 10 + int(ch)
+        elif ch == '[':
+            num_st.append(cur_num)
+            str_st.append(''.join(cur_str))
+            cur_num = 0
+            cur_str = []
+        elif ch == ']':
+            k = num_st.pop()
+            prev = str_st.pop()
+            cur_str = [prev + ''.join(cur_str) * k]
+        else:
+            cur_str.append(ch)
+    return ''.join(cur_str)
+# Складність: O(n) часу/пам’яті.
